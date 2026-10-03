@@ -104,7 +104,7 @@ export default function Home() {
         <div className="kicker">GET IN TOUCH</div>
         <h2>Have a simulator,<br /><em>game or VR idea?</em></h2>
         <p>Available for senior development, simulator engineering, VR/AR and real-time interactive projects.</p>
-        <a className="contact-link" href="mailto:afran_hafeez@yahoo.com">your-email@example.com ↗</a>
+        <a className="contact-link" href="mailto:afran_hafeez@yahoo.com">afran_hafeez@yahoo.com↗</a>
         <div className="footer-line"><span>Muhammad Afran · Senior Unity Developer</span><span>© 2026</span></div>
       </section>
     </main>
