@@ -1,24 +1,78 @@
-const projects = [
+import ProjectGallery, { type ProjectImage } from "../components/ProjectGallery";
+
+const img = (file: string, caption: string): ProjectImage => ({
+  src: `/images/projects/${file}.jpg`,
+  caption,
+});
+
+type Project = {
+  number: string;
+  title: string;
+  text: string;
+  tags: string[];
+  images?: ProjectImage[];
+};
+
+const projects: Project[] = [
   {
     number: "01",
     title: "Tank Crew Training Simulator",
     text: "Multi-station training environment connecting driver, gunner, commander and instructor systems over a shared LAN.",
-    tags: ["Unity / Unreal", "Multiplayer", "Training"],
+    tags: ["Unreal Engine 5", "Multi-PC LAN", "6-DOF Motion", "VR Ready"],
+    images: [
+      img("tank-crew-main", "Tank crew simulator"),
+      img("tank-driver-station", "Driver station"),
+      img("tank-gunner-station", "Gunner station"),
+      img("tank-commander-station", "Commander station"),
+      img("tank-instructor-station", "Instructor station"),
+    ],
   },
   {
     number: "02",
-    title: "VR & AR Training Systems",
-    text: "Immersive interactive training applications for Meta Quest, including hand interaction and simulator integrations.",
-    tags: ["Meta Quest", "Horizon Interaction SDK", "VR/AR"],
+    title: "Multi-Role Training System",
+    text: "Networked driver, gunner, commander and instructor stations with synchronized simulation, real-time communication and scenario control.",
+    tags: ["Unity / Unreal", "LAN Networking", "Real-time"],
+    images: [
+      img("multirole-control-room", "Instructor control room"),
+      img("multirole-vehicle", "Simulated vehicle"),
+      img("multirole-cockpit", "Driver cockpit view"),
+    ],
   },
   {
     number: "03",
     title: "6-DOF Motion Platform",
-    text: "Real-time motion data pipeline integrating simulation telemetry with FlyPT Mover and motion-platform hardware.",
-    tags: ["UDP", "FlyPT Mover", "Motion"],
+    text: "Real-time motion data pipeline integrating simulation telemetry with FlyPT Mover and an AMC-AASD15A controller for smooth, accurate movement.",
+    tags: ["UDP", "FlyPT Mover", "AMC-AASD15A", "Motion"],
+    images: [
+      img("motion-platform-main", "6-DOF motion platform"),
+      img("motion-flypt-mover", "FlyPT Mover telemetry"),
+      img("motion-amc-aasd15a", "AMC-AASD15A controller"),
+    ],
   },
   {
     number: "04",
+    title: "VR & AR Training Systems",
+    text: "Immersive interactive training applications for Meta Quest, including hand interaction and simulator integrations.",
+    tags: ["Unity", "Meta Quest", "Horizon Interaction SDK", "Hand Tracking"],
+    images: [
+      img("vr-training-main", "VR training session"),
+      img("vr-hand-tracking-1", "Hand-tracked controls"),
+      img("vr-hand-tracking-2", "Hand interaction"),
+    ],
+  },
+  {
+    number: "05",
+    title: "Military Simulation Environment",
+    text: "Realistic terrain, vehicles and training scenarios built in Unreal Engine 5, optimized for training and multiplayer.",
+    tags: ["Unreal Engine 5", "C++ / Blueprints", "Multiplayer"],
+    images: [
+      img("ue5-environment-main", "UE5 training scenario"),
+      img("ue5-environment-terrain", "Open terrain"),
+      img("ue5-environment-editor", "Unreal Editor"),
+    ],
+  },
+  {
+    number: "06",
     title: "Hardware-Integrated Simulator",
     text: "Arduino Mega controllers, incremental encoders, proximity sensors and switch panels connected to real-time simulation software.",
     tags: ["Arduino", "Encoders", "Sensors"],
@@ -72,7 +126,11 @@ export default function Home() {
         <div className="project-grid">
           {projects.map((p) => (
             <article className="project" key={p.number}>
-              <div className="project-art"><span>{p.number}</span><div className="crosshair">+</div></div>
+              {p.images?.length ? (
+                <ProjectGallery number={p.number} title={p.title} images={p.images} />
+              ) : (
+                <div className="project-art"><span>{p.number}</span><div className="crosshair">+</div></div>
+              )}
               <div className="project-body">
                 <h3>{p.title}</h3><p>{p.text}</p>
                 <div className="tags">{p.tags.map(t => <span key={t}>{t}</span>)}</div>
